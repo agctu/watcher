@@ -79,7 +79,7 @@ class Watcher:
         ret={}
         for cur,_,file_names in os.walk(self.option.dir):
             for i in file_names:
-                fname=cur+'/'+i
+                fname=cur.replace('\\','/')+'/'+i
                 if self.matcher.match(fname):
                     ret[fname]=self.getFileState(fname)
         return ret
