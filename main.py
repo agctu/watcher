@@ -18,6 +18,8 @@ parser.add_argument('--caction','-c',type=str,help='command executed on file cre
 parser.add_argument('--before-action','-b',type=str,help='command executed before all other commands being executed')
 parser.add_argument('--period','-p',type=float,help='the time between two adjacent scanning')
 
+parser.add_argument('--from-empty','-e',action='store_true',help='start the watcher loop as if no file exists before')
+
 parser.add_argument('--use_hash','-H',action='store_true',help='use hash to detect changes instead of ctime')
 
 parser.add_argument('--verbose','-v',action='store_true',help='show debug messages')

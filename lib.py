@@ -13,6 +13,7 @@ class WatcherOption:
     caction: str
     before_action: str
     period: float
+    from_empty:bool
     use_hash: bool
     verbose: bool
     def __init__(self,config_dict):
@@ -27,6 +28,7 @@ class WatcherOption:
             'caction',
             'before_action',
             'period',
+            'from_empty',
             'use_hash',
             'verbose',
         ]:
@@ -43,6 +45,7 @@ class WatcherOption:
         self.caction='echo file {} created'
         self.before_action='echo changed;'
         self.period=1
+        self.from_empty=False
         self.use_hash=False
         self.verbose=False
 
@@ -57,7 +60,10 @@ class Watcher:
             print(self.option)
 
     def startLoop(self):
-        self.last_collection=self.collect()
+        if self.option.from_empty:
+            self.last_collection={}
+        else:
+            self.last_collection=self.collect()
         while True:
             collection=self.collect()
             change_report=self.diff(self.last_collection,collection)
